@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: .dark on <html> toggles the `dark:` variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ----------------------------------------------------------------
+   Bernit Laundry — design tokens
+   Palette: Deep Navy + Royal Blue with a restrained Gold accent.
+   Light mode reads as bright and clean, dark mode reads as the
+   premium brand navy.
+------------------------------------------------------------------ */
+:root {
+  --color-navy-950: #050b18;
+  --color-navy-900: #0a1730;
+  --color-navy-800: #122145;
+  --color-navy-700: #1a2e58;
+  --color-royal-600: #1b3fd6;
+  --color-royal-500: #3457e8;
+  --color-royal-400: #5c78f0;
+  --color-royal-300: #91a4f6;
+  --color-gold-600: #a9812f;
+  --color-gold-500: #c9a24c;
+  --color-gold-300: #e4c97e;
+  --color-silver-500: #9aa5b3;
+  --color-silver-300: #c7cfda;
+  --color-mist-50: #f6f8fb;
+  --color-mist-100: #eef1f7;
+  --color-mist-200: #e3e8f1;
+
+  --background: var(--color-mist-50);
+  --surface: #ffffff;
+  --surface-2: var(--color-mist-100);
+  --foreground: var(--color-navy-900);
+  --muted: #56617a;
+  --border-soft: var(--color-mist-200);
+  --brand: var(--color-royal-600);
+  --brand-strong: var(--color-navy-900);
+  --accent: var(--color-gold-500);
+  --ring: var(--color-royal-400);
+}
+
+.dark {
+  --background: var(--color-navy-950);
+  --surface: var(--color-navy-900);
+  --surface-2: var(--color-navy-800);
+  --foreground: #eef1f7;
+  --muted: #a7b1c6;
+  --border-soft: rgba(199, 207, 218, 0.12);
+  --brand: var(--color-royal-400);
+  --brand-strong: #ffffff;
+  --accent: var(--color-gold-300);
+  --ring: var(--color-royal-300);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border-soft: var(--border-soft);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-accent: var(--accent);
+  --color-ring: var(--ring);
+
+  --color-navy-950: var(--color-navy-950);
+  --color-navy-900: var(--color-navy-900);
+  --color-navy-800: var(--color-navy-800);
+  --color-navy-700: var(--color-navy-700);
+  --color-royal-600: var(--color-royal-600);
+  --color-royal-500: var(--color-royal-500);
+  --color-royal-400: var(--color-royal-400);
+  --color-royal-300: var(--color-royal-300);
+  --color-gold-600: var(--color-gold-600);
+  --color-gold-500: var(--color-gold-500);
+  --color-gold-300: var(--color-gold-300);
+  --color-silver-500: var(--color-silver-500);
+  --color-silver-300: var(--color-silver-300);
+  --color-mist-50: var(--color-mist-50);
+  --color-mist-100: var(--color-mist-100);
+  --color-mist-200: var(--color-mist-200);
+
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-data: var(--font-jetbrains), ui-monospace, monospace;
+
+  --animate-drift: drift 18s ease-in-out infinite;
+  --animate-dash: dash 2.4s linear infinite;
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@layer base {
+  * {
+    border-color: var(--border-soft);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-feature-settings: "ss01" 1;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background: var(--color-royal-400);
+    color: white;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(2%, -3%, 0) scale(1.05); }
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -48; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
