@@ -11,7 +11,7 @@ import { AppDownload } from "@/components/home/app-download";
 
 export default function HomePage() {
   return (
-    <>
+    <main>
       <Hero />
       <Promotions />
       <WhyChoose />
@@ -22,6 +22,6 @@ export default function HomePage() {
       <Faq />
       <Newsletter />
       <AppDownload />
-    </>
+    </main>
   );
 }
